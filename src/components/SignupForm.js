@@ -39,7 +39,7 @@ class SignupForm extends React.Component {
 				.then(
 					() => {
 						this.props.addFlashMessage({
-							type: 'succes',
+							type: 'success',
 							text: 'Succesfully signed up. Welcome!'
 						});
 						this.context.router.push('/');
