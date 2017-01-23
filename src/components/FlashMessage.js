@@ -6,7 +6,7 @@ class FlashMessage extends React.Component {
 		this.props.deleteFlashMessage(this.props.message.id);
 	};
 	render() {
-		const { id, type, text } = this.props.message;
+		const { type, text } = this.props.message;
 		return (
 			<div className={classNames('alert', {
 				'alert-success': type === 'success',

@@ -8,7 +8,7 @@ import users from './routes/users';
 const app = express();
 app.use(bodyParser.json());
 // need to start mongodb first for this to work
-const db = monk('localhost:27017/reddice');
+export const db = monk('localhost:27017/reddice');
 
 app.use((req, res, next) => {
 	req.db = db;
