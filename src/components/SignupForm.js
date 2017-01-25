@@ -4,6 +4,7 @@ import map from 'lodash/map';
 import classNames from 'classnames';
 import validateInput from '../../backend/shared/validations/signup';
 import TextFieldGroup from './TextFieldGroup';
+import isEmpty from 'lodash/isEmpty';
 
 class SignupForm extends React.Component {
 	state = {
@@ -14,6 +15,7 @@ class SignupForm extends React.Component {
 		timezone: '',
 		errors: {},
 		isLoading: false,
+		invalid: false,
 	};
 
 	isValid = () => {
@@ -24,6 +26,23 @@ class SignupForm extends React.Component {
 		}
 
 		return isValid;
+	};
+
+	checkUserExists = (e) => {
+		const { name, value } = e.target;
+		if(value !== '') {
+			this.props.doesUserExist(value).then(res => {
+				let errors = {...this.state.errors};
+				let invalid;
+				if(res.data.user) {
+					errors[name] = `That ${name} is already in use.`;
+				} else {
+					delete errors[name];
+
+				}
+				this.setState({ errors, invalid: !isEmpty(errors) });
+			})
+		}
 	};
 
 	onChange = (e) => {
@@ -63,6 +82,7 @@ class SignupForm extends React.Component {
 					error={errors.username}
 					field="username"
 					value={this.state.username}
+					checkUserExists={this.checkUserExists}
 					label="Username"
 					onChange={this.onChange}
 				/>
@@ -73,6 +93,7 @@ class SignupForm extends React.Component {
 					value={this.state.email}
 					label="Email"
 					onChange={this.onChange}
+					checkUserExists={this.checkUserExists}
 					type="email"
 				/>
 
@@ -110,7 +131,7 @@ class SignupForm extends React.Component {
 				</div>
 
 				<div className="form-group">
-					<button disabled={this.state.isLoading} type="submit" className="btn btn-primary btn-lg">Sign Up</button>
+					<button disabled={this.state.isLoading || this.state.invalid} type="submit" className="btn btn-primary btn-lg">Sign Up</button>
 				</div>
 			</form>
 		)
@@ -120,6 +141,7 @@ class SignupForm extends React.Component {
 SignupForm.propTypes = {
 	userSignupRequest: React.PropTypes.func.isRequired,
 	addFlashMessage: React.PropTypes.func.isRequired,
+	doesUserExist: React.PropTypes.func.isRequired,
 };
 
 SignupForm.contextTypes = {

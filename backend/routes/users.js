@@ -27,6 +27,17 @@ function validateInput(data, otherValidations) {
 	});
 }
 
+router.get('/:identifier', (req, res) => {
+	const users = db.get('usersCollection');
+	users.find({
+		$or: [ {email: req.params.identifier}, {username: req.params.identifier} ]},
+		{email: 1, username: 1, _id: 0 })
+			.then(arr => {
+				const user = arr[0];
+				res.json({ user });
+			})
+});
+
 router.post('/', (req, res) => {
 	validateInput(req.body, commonValidations).then(({ errors, isValid }) => {
 		const users = db.get('usersCollection');
