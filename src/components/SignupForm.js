@@ -33,7 +33,6 @@ class SignupForm extends React.Component {
 		if(value !== '') {
 			this.props.doesUserExist(value).then(res => {
 				let errors = {...this.state.errors};
-				let invalid;
 				if(res.data.user) {
 					errors[name] = `That ${name} is already in use.`;
 				} else {
