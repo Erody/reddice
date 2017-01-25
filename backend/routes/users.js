@@ -31,7 +31,7 @@ router.get('/:identifier', (req, res) => {
 	const users = db.get('usersCollection');
 	users.find({
 		$or: [ {email: req.params.identifier}, {username: req.params.identifier} ]},
-		{email: 1, username: 1, _id: 0 })
+		{email: 1, username: 1, _id: 0 }) // only return email and username fields
 			.then(arr => {
 				const user = arr[0];
 				res.json({ user });

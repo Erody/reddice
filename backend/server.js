@@ -4,6 +4,7 @@ import monk from 'monk';
 import bodyParser from 'body-parser';
 
 import users from './routes/users';
+import auth from './routes/auth';
 
 const app = express();
 app.use(bodyParser.json());
@@ -15,5 +16,6 @@ app.use((req, res, next) => {
 	next();
 });
 app.use('/api/users', users);
+app.use('/api/auth', auth);
 
 app.listen(8080, () => console.log('Listening on localhost:8080'));
