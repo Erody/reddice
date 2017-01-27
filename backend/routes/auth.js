@@ -13,7 +13,6 @@ router.post('/', (req, res) => {
 		 $or: [{username: identifier}, {email: identifier}]
 	}).then( arr => {
 		const user = arr[0];
-		console.log(user);
 		if(user) {
 			if(bcrypt.compareSync(password, user.password_digest)) {
 				const token = jwt.sign({

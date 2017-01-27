@@ -203,6 +203,7 @@ module.exports = {
   node: {
     fs: 'empty',
     net: 'empty',
-    tls: 'empty'
+    tls: 'empty',
+    dns: 'empty',
   }
 };

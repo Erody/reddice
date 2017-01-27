@@ -2,7 +2,7 @@ import React from 'react';
 import TextFieldGroup from './TextFieldGroup';
 import validateInput from '../../backend/shared/validations/login';
 import { connect } from 'react-redux';
-import { login } from '../actions/login';
+import { login } from '../actions/auth';
 
 class LoginForm extends React.Component {
 	state = {
