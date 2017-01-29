@@ -13,9 +13,7 @@ export default (req, res, next) => {
 			if(err) {
 				res.status(401).json({ error: 'Failed to authenticate' });
 			} else {
-				req.currentUser = {
-					id: decoded,
-				};
+				req.userId = decoded.id;
 				next();
 			}
 		})
