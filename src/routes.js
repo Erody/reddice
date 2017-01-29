@@ -4,11 +4,13 @@ import App from './components/App';
 import Greetings from './components/Greetings';
 import SignupPage from './components/SignupPage';
 import LoginPage from './components/LoginPage';
+import NewEventPage from './components/NewEventPage';
 
 export default (
 	<Route path="/" component={App} >
 		<IndexRoute component={Greetings} />
 		<Route path="signup" component={SignupPage}/>
 		<Route path="login" component={LoginPage}/>
+		<Route path="new-event" component={NewEventPage} />
 	</Route>
 )

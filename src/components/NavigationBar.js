@@ -13,6 +13,7 @@ class NavigationBar extends React.Component {
 
 		const userLinks = (
 			<ul className="nav navbar-nav navbar-right">
+				<li><Link to="/new-event">New Event</Link></li>
 				<li><a onClick={this.logout} href="#">Logout</a></li>
 			</ul>
 		);
